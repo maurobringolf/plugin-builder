@@ -3,7 +3,7 @@
 function runPluginBuilder()
 {
 
-	# Ask for data
+    # Ask for data
     echo "Plugin key: lowercase with underscores (e.g. 'my_plugin')"
     read PLUGIN_KEY
 
@@ -40,13 +40,13 @@ function runPluginBuilder()
     # Escape URI for regexp use within sed
     PLUGIN_URI=$(echo $PLUGIN_URI | sed -e 's/\//\\\//g')
 
-	# Fetch the current base code from GitHub
+     # Fetch the current base code from GitHub
     git clone https://github.com/WPSwitzerland/plugin-boilerplate-psr $PLUGIN_KEY
-	rm -rf $PLUGIN_KEY/.git $PLUGIN_KEY/README.md
+    rm -rf $PLUGIN_KEY/.git $PLUGIN_KEY/README.md
     mv $PLUGIN_KEY/plugin-boilerplate-psr.php $PLUGIN_KEY/$PLUGIN_KEY.php
     mv $PLUGIN_KEY/README_BLANK.md $PLUGIN_KEY/README.md
 
-	# Search and replace metadata and names
+    # Search and replace metadata and names
 
     # Plugin key
     find $PLUGIN_KEY -type f -name "*.*" -exec sed -i "s/PLUGIN_KEY/$PLUGIN_KEY/g" {} +
@@ -87,13 +87,13 @@ function runPluginBuilder()
     # Plugin name
     if ! test -z "$PLUGIN_NAME"
     then
-		find $PLUGIN_KEY -type f -name "*.*" -exec sed -i "s/PLUGIN_NAME/$PLUGIN_NAME/g" {} +
+        find $PLUGIN_KEY -type f -name "*.*" -exec sed -i "s/PLUGIN_NAME/$PLUGIN_NAME/g" {} +
     fi
 
     # Plugin description
     if ! test -z "$PLUGIN_DESCRIPTION"
     then
-    	find $PLUGIN_KEY -type f -name "*.*" -exec sed -i "s/PLUGIN_DESCRIPTION/$PLUGIN_DESCRIPTION/g" {} +
+        find $PLUGIN_KEY -type f -name "*.*" -exec sed -i "s/PLUGIN_DESCRIPTION/$PLUGIN_DESCRIPTION/g" {} +
     fi
 
     # Plugin author namespace (Usually a company name; used as the top-level PHP namespace)
